@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="rltsquare_config" translate="label" sortOrder="200">
+            <label>RLTSquare</label>
+        </tab>
+        <section id="custom_email_template" translate="label" type="text" sortOrder="42" showInDefault="1"
+                 showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Custom Email Template</label>
+            <tab>rltsquare_config</tab>
+            <resource>RLTSquare_CustomEmailTemplate::custom_email_template</resource>
+            <group id="general" translate="label" sortOrder="92" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Custom Email Template</label>
+
+                <field id="enabledisable" translate="label" type="select" sortOrder="5" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="sender_name" type="text" sortOrder="50" showInDefault="1" showInWebsite="1"
+                       showInStore="1" canRestore="0">
+                    <label>Sender Name</label>
+                    <validate>required-entry</validate>
+                </field>
+
+                <field id="sender_email" type="text" sortOrder="50" showInDefault="1" showInWebsite="1"
+                       showInStore="1" canRestore="0">
+                    <label>Sender Email Address</label>
+                    <validate>required-entry</validate>
+                </field>
+                <field id="email_template" translate="label" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Custom Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <comment>
+                        <![CDATA[Please Select your custom email template from this list.]]>
+                    </comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
