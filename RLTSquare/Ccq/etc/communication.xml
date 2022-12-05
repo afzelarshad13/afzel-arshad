@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Communication/etc/communication.xsd">
+    <topic name="rltsquare.hello.world" request="RLTSquare\Ccq\Api\Data\CcqInterface">
+        <handler name="rltsquare.hello.world.handler"
+                 type="RLTSquare\Ccq\Model\Queue\Consumer\Consumer"
+                 method="processMessage"/>
+    </topic>
+</config>
