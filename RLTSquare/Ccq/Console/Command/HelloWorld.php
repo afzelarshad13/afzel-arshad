@@ -14,6 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use RLTSquare\Ccq\Api\Data\CcqInterface;
 
 /**
+ * @author Afzel Arshad
  * Cli command for message queue
  */
 class HelloWorld extends Command

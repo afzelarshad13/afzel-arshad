@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace RLTSquare\Ccq\Model\Queue\Consumer;
 
 use Psr\Log\LoggerInterface;
+use RLTSquare\Ccq\Api\Data\CcqInterface;
 
 /**
  * @author Afzel Arshad
@@ -25,10 +26,13 @@ class Consumer
     }
 
     /**
+     * @param CcqInterface $request
      * @return void
      */
-    public function processMessage(): void
+    public function processMessage(CcqInterface $request): void
     {
-        $this->logger->debug('hello world from rltsquare_hello_world queue job');
+        $name = $request->getName();
+        $age = $request->getAge();
+        $this->logger->debug('hello world from rltsquare_hello_world queue job : ' . $name . " " . $age);
     }
 }

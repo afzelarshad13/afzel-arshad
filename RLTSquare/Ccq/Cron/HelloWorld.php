@@ -6,6 +6,7 @@ namespace RLTSquare\Ccq\Cron;
 use Psr\Log\LoggerInterface;
 
 /**
+ * @author Afzel Arshad
  * cron class for loging messages
  */
 class HelloWorld

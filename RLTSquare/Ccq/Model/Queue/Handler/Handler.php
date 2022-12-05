@@ -5,6 +5,7 @@ namespace RLTSquare\Ccq\Model\Queue\Handler;
 use RLTSquare\Ccq\Api\Data\CcqInterface;
 
 /**
+ * @author Afzel Arshad
  * Handler class to implements CcqInterface
  */
 class Handler implements CcqInterface

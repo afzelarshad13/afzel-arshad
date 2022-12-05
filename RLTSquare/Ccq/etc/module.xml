@@ -4,6 +4,7 @@
     <module name="RLTSquare_Ccq">
         <sequence>
             <module name="Magento_Amqp"/>
+            <module name="Magento_MessageQueue"/>
         </sequence>
     </module>
 </config>
