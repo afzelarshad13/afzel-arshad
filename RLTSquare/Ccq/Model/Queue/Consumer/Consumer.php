@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace RLTSquare\Ccq\Model\Queue\Consumer;
 
 use Psr\Log\LoggerInterface;
-use RLTSquare\Ccq\Api\Data\CcqInterface;
 
 /**
  * @author Afzel Arshad
@@ -12,6 +11,10 @@ use RLTSquare\Ccq\Api\Data\CcqInterface;
  */
 class Consumer
 {
+    /**
+     *  Topic name
+     */
+    const TOPIC_NAME = 'rltsquare.hello.world';
     /**
      * @var LoggerInterface
      */
@@ -26,10 +29,10 @@ class Consumer
     }
 
     /**
-     * @param CcqInterface $request
+     * @param  $request
      * @return void
      */
-    public function processMessage(CcqInterface $request): void
+    public function processMessage($request): void
     {
         $name = $request->getName();
         $age = $request->getAge();

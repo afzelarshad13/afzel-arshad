@@ -7,11 +7,12 @@ use Exception;
 use Magento\Framework\MessageQueue\PublisherInterface;
 use Magento\Framework\Serialize\Serializer\Json;
 use Psr\Log\LoggerInterface;
+use RLTSquare\Ccq\Api\Data\CcqInterface;
+use RLTSquare\Ccq\Model\Queue\Consumer\Consumer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use RLTSquare\Ccq\Api\Data\CcqInterface;
 
 /**
  * @author Afzel Arshad
@@ -20,18 +21,13 @@ use RLTSquare\Ccq\Api\Data\CcqInterface;
 class HelloWorld extends Command
 {
     /**
-     *  Topic name
-     */
-    const TOPIC_NAME = 'rltsquare.hello.world';
-
-    /**
      * const name int|string
      */
-    private const NAME = 'name';
+    private const INPUT_OPTION_NAME = 'name';
     /**
      * const age int|string
      */
-    private const AGE = 'age';
+    private const INPUT_OPTION_AGE = 'age';
     /**
      * @var PublisherInterface
      */
@@ -50,7 +46,6 @@ class HelloWorld extends Command
      */
     protected CcqInterface $cq;
 
-
     /**
      * @param PublisherInterface $publisher
      * @param LoggerInterface $logger
@@ -59,9 +54,9 @@ class HelloWorld extends Command
      */
     public function __construct(
         PublisherInterface $publisher,
-        LoggerInterface $logger,
-        Json $json,
-        CcqInterface $cq
+        LoggerInterface    $logger,
+        Json               $json,
+        CcqInterface       $cq
     ) {
         $this->publisher = $publisher;
         $this->logger = $logger;
@@ -79,15 +74,15 @@ class HelloWorld extends Command
         $this->setName('rltsquare:hello:world');
         $this->setDescription('Commands to take 2 argument a string and num and print it on console');
         $this->addArgument(
-            self::NAME,
+            self::INPUT_OPTION_NAME,
             null,
-            InputArgument::OPTIONAL,
+            InputArgument::REQUIRED,
             'NAME'
         );
         $this->addArgument(
-            self::AGE,
+            self::INPUT_OPTION_AGE,
             null,
-            InputArgument::OPTIONAL,
+            InputArgument::REQUIRED,
             'AGE'
         );
         parent::configure();
@@ -105,14 +100,14 @@ class HelloWorld extends Command
     {
         $exitCode = 0;
         try {
-            $name = $input->getArgument(self::NAME);
-            $age = $input->getArgument(self::AGE);
+            $name = $input->getArgument(self::INPUT_OPTION_NAME);
+            $age = $input->getArgument(self::INPUT_OPTION_AGE);
             $this->cq->setName($name);
             $this->cq->setAge($age);
 
             $output->writeln('<info>Provided name is `' . $name . '`</info>');
             $output->writeln('<info>Provided age is `' . $age . '`</info>');
-            $this->publisher->publish(self::TOPIC_NAME, $this->cq);
+            $this->publisher->publish(Consumer::TOPIC_NAME, $this->cq);
             $output->writeln('<info>Success message.</info>');
             $this->logger->info($name . ' ' . $age . ' has been published');
         } catch (Exception $e) {
