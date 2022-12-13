@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="rltsquare_config" translate="label" sortOrder="10">
+            <label>RLTSquare</label>
+        </tab>
+        <section id="unit3" translate="label" type="text" sortOrder="10" showInDefault="1"
+                 showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Unit 3</label>
+            <tab>rltsquare_config</tab>
+            <resource>RLTSquare_Unit3::unit3</resource>
+            <group id="unit3" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Unit 3</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="username" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" type="text" canRestore="1">
+                    <label>Username</label>
+                    <comment>A descriptive text explaining this configuration field.</comment>
+                    <validate>required-entry no-whitespace</validate> <!-- Field is required and must not contain any whitespace. -->
+                    <if_module_enabled>RLTSquare_Unit3</if_module_enabled>
+                    <depends> <!-- This field will only be visible if the field with the id enable is set to value 1 -->
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="password" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" type='obscure' canRestore="1">
+                    <label>Password</label>
+                    <comment>A descriptive text explaining this configuration field.</comment>
+                    <validate>required-entry no-whitespace validate-admin-password</validate> <!-- Field is required and must not contain any whitespace. -->
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <if_module_enabled>RLTSquare_Unit3</if_module_enabled>
+                    <depends> <!-- This field will only be visible if the field with the id enable is set to value 1 -->
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="environment_type" translate="label" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" type="select" canRestore="1">
+                    <label>Environment Type</label>
+                    <comment>This field is an example for a basic yes or no select.</comment>
+                    <source_model>RLTSquare\Unit3\Model\Config\Source\Types</source_model>
+                    <if_module_enabled>RLTSquare_Unit3</if_module_enabled>
+                    <depends> <!-- This field will only be visible if the field with the id enable is set to value 1 -->
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
