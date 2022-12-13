@@ -1,0 +1,24 @@
+<?php
+/**
+ * @var RLTSquare\Unit3\Block\MultiWebsite $block
+ * @var Magento\Framework\Escaper $escaper
+ */
+use Magento\Framework\Exception\NoSuchEntityException;
+?>
+<?php
+try {
+    if ($block->getEnable()) :
+        $type = $block->getEnvironmentTypes();
+    $password = $block->getPassword(); ?>
+        <label for="username">Username:</label>
+        <?= $escaper->escapeHtml($block->getUserName()) ?>
+        <br><label for="password">Password:</label>
+        <?php if ($type === 'Staging' || $type === 'Development') { ?>
+        <?= $escaper->escapeHtml(substr($password, 0, 3)) ?>
+    <?php } ?>
+        <br><label for="environment_type">Environment Type:</label>
+        <?= $escaper->escapeHtml($type) ?>
+    <?php endif;
+} catch (NoSuchEntityException $e) {
+    $escaper->escapeHtml($e);
+} ?>
