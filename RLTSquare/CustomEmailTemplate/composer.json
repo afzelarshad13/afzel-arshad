@@ -1,14 +1,23 @@
 {
   "name": "rlt-square/module-custom-email-template",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "N/A",
   "type": "magento2-module",
   "require": {
-    "magento/framework": "*"
+    "magento/framework": "*",
+    "php": "~7.4.0|~8.1"
   },
   "license": [
     "Proprietary"
   ],
+    "authors":[
+        {
+            "name" : "Afzel Arshad",
+            "email" : "afzal.arshad@rltsquare.com",
+            "homepage" : "https://www.rltsquare.com",
+            "role" : "Software Developer"
+        }
+    ],
   "autoload": {
     "files": [
       "registration.php"

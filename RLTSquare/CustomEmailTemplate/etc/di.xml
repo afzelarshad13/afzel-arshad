@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Virtual override of based handler fileName -->
+    <virtualType name="RLTSqaureLoggerHandler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/rltsuare.log</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Virtual override of Monolog logger -->
+    <virtualType name="RLTSquareLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="unit1LoggerHandler" xsi:type="object">RLTSqaureLoggerHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Redefining the $logger parameter of our RLTSquare\Unit1\Controller\Index\Index type -->
+    <type name="RLTSquare\CustomEmailTemplate\Controller\Index\Index">
+        <arguments>
+            <argument name="logger" xsi:type="object">RLTSquareLogger</argument>
+        </arguments>
+    </type>
+
+</config>
